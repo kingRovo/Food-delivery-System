@@ -2,6 +2,7 @@ package com.fds.fooddeliverysystem.model;
 
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -46,6 +47,7 @@ public class Restaurant {
     @NotNull
     @JsonFormat(pattern = "HH:mm:ss")
     private LocalTime closing_Time;
+
 
 
     @OneToOne(cascade = CascadeType.ALL)

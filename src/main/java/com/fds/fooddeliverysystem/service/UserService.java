@@ -1,5 +1,6 @@
 package com.fds.fooddeliverysystem.service;
 
+import com.fds.fooddeliverysystem.exception.UserException;
 import com.fds.fooddeliverysystem.model.*;
 import com.fds.fooddeliverysystem.model.dto.OrderStatus;
 import com.fds.fooddeliverysystem.repository.*;
@@ -67,7 +68,8 @@ public class UserService {
         }
         catch (Exception exception){
             log.error("****** unable to fetch account balance ******");
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            throw new UserException(exception.getMessage(),HttpStatus.BAD_REQUEST);
+
         }
     }
 
@@ -91,7 +93,7 @@ public class UserService {
         }
         catch (Exception exception){
             log.error("bad request unable to add balance.");
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            throw new UserException(exception.getMessage(),HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -116,7 +118,7 @@ public class UserService {
         }
         catch (Exception exception){
             log.error("unable to fetch transaction record");
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            throw new UserException(exception.getMessage(),HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -149,9 +151,16 @@ public class UserService {
         catch (Exception exception){
 
             log.error("**** bad request, don't make order ****");
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            throw new UserException(exception.getMessage(),HttpStatus.BAD_REQUEST);
         }
     }
+
+    /**
+     * this method process payment.
+     * @param price
+     * @param user
+     * @param restaurant
+     */
 
     @Transactional
     public void doPayment(float price, User user, Restaurant restaurant) {

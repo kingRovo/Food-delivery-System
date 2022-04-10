@@ -1,5 +1,6 @@
 package com.fds.fooddeliverysystem.service;
 
+import com.fds.fooddeliverysystem.exception.RestaurantException;
 import com.fds.fooddeliverysystem.model.BusinessWallet;
 import com.fds.fooddeliverysystem.model.Dish;
 import com.fds.fooddeliverysystem.model.Restaurant;
@@ -62,7 +63,7 @@ public class RestaurantService {
         }
         catch (Exception exception){
             log.error("************ unable to fetch data..************");
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            throw  new RestaurantException(exception.getMessage(),HttpStatus.BAD_REQUEST);
         }
 
     }
@@ -85,7 +86,7 @@ public class RestaurantService {
         }
         catch (Exception exception){
             log.error("****** unable to fetch account balance ******");
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            throw  new RestaurantException(exception.getMessage(),HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -109,7 +110,8 @@ public class RestaurantService {
         }
         catch (Exception exception){
             log.error("bad request unable to add balance.");
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+
+            throw  new RestaurantException(exception.getMessage(),HttpStatus.BAD_REQUEST);
         }
     }
 
@@ -129,9 +131,8 @@ public class RestaurantService {
 
         }
         catch (Exception exception){
-
             log.error("unable to fetch dish data.");
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+            throw  new RestaurantException(exception.getMessage(),HttpStatus.BAD_REQUEST);
         }
     }
 

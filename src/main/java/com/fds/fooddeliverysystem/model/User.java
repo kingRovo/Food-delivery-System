@@ -28,7 +28,7 @@ public class User {
     private String contact_num;
 
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "wallet_id", referencedColumnName = "id")
     private Wallet wallet;
 
